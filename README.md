@@ -27,7 +27,7 @@ This is a simple implementation of the classic Tic-Tac-Toe game in Java using Sw
 
 ### Code Structure
 
-#### `Game.java` Class
+### `Game.java` Class
 
 The `Game.java` class is the core component of this Tic-Tac-Toe application. It handles the game's logic, user interface, and player interactions.
 
@@ -70,6 +70,6 @@ The `Game.java` class is the core component of this Tic-Tac-Toe application. It 
 
 This class serves as the heart of the Tic-Tac-Toe game, managing game state and player interactions.
 
-#### `Main.java` Class
+### `Main.java` Class
 
 Contains the `main` method to start the game.
