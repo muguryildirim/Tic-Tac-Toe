@@ -29,7 +29,7 @@ This is a simple implementation of the classic Tic-Tac-Toe game in Java using Sw
 
 ### `Game.java` Class
 
-The `Game.java` class is the core component of this Tic-Tac-Toe application. It handles the game's logic, user interface, and player interactions.
+The `Game.java` class is the core component of this Tic-Tac-Toe application. It handles the game's logic, user interface, and player interactions. This class serves as the heart of the Tic-Tac-Toe game, managing game state and player interactions.
 
 #### Member Variables
 
@@ -68,7 +68,7 @@ The `Game.java` class is the core component of this Tic-Tac-Toe application. It 
 
 - The `firstTurn()` method randomly selects the starting player (X or O) and sets the initial game status accordingly.
 
-This class serves as the heart of the Tic-Tac-Toe game, managing game state and player interactions.
+
 
 ### `Main.java` Class
 
