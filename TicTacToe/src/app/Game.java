@@ -1,242 +1,115 @@
 package app;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Game implements ActionListener {
-	Random random = new Random();
-	JFrame frame = new JFrame();
-	JPanel title_panel = new JPanel();
-	JPanel button_panel = new JPanel();
-	JLabel textfield = new JLabel();
-	JButton[] button = new JButton[9];
-	boolean playerTurn;
-	
-	Game()
-	{
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000,1000);
-		frame.getContentPane().setBackground(new Color(50,50,50));
-		frame.setLayout(new BorderLayout());
-		frame.setVisible(true);
-		
-		textfield.setBackground(new Color(25,25,25));
-		textfield.setForeground(new Color(25,255,0));
-		textfield.setFont(new Font("SAN_SERIF", Font.BOLD, 75));
-		textfield.setHorizontalAlignment(JLabel.CENTER);
-		textfield.setText("Game of Tic-Tac-Toe");
-		textfield.setOpaque(true);
-		
-		title_panel.setLayout(new BorderLayout());
-		title_panel.setBounds(0, 0, 800, 100);
-		
-		button_panel.setLayout(new GridLayout(3,3));
-		button_panel.setBackground(new Color(150,150,150,150));
-		
-		for(int i = 0; i < 9;i++)
-		{
-			button[i] = new JButton();
-			button_panel.add(button[i]);
-			button[i].setFont(new Font("SAN_SERIF", Font.BOLD,120));
-			button[i].setFocusable(false);
-			button[i].addActionListener(this);
-		}
-		title_panel.add(textfield);
-		frame.add(title_panel, BorderLayout.NORTH);
-		frame.add(button_panel);
-		
-		firstTurn();
-	}
+    private final JFrame frame = new JFrame("Tic-Tac-Toe");
+    private final JPanel titlePanel = new JPanel();
+    private final JPanel buttonPanel = new JPanel();
+    private final JLabel textfield = new JLabel("X's Turn");
+    private final JButton[] buttons = new JButton[9];
+    private boolean isXTurn = true;
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		// TODO Auto-generated method stub
-		for(int i = 0;i < 9;i++)
-		{
-			if(e.getSource() == button[i])
-			{
-				if(playerTurn)
-				{
-					if(button[i].getText() =="")
-					{
-						button[i].setForeground(new Color(255,0,0));
-						button[i].setText("X");
-						playerTurn = false;
-						textfield.setText("O turn");
-						check();
-					}
-				}
-			else
-			{
-				if(button[i].getText() == "")
-				{
-					button[i].setForeground(new Color(0,0,255));
-					button[i].setText("O");
-					playerTurn = true;
-					textfield.setText("X turn");
-					check();
-				}
-			}
-		  }
-	   }
-	}
-	public void firstTurn() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if(random.nextInt(2)==0) {
-			playerTurn=true;
-			textfield.setText("X turn");
-		}
-		else {
-			playerTurn=false;
-			textfield.setText("O turn");
-		}
-	}
-	
-	public void check() {
-		//Checking for the X Players moves
-		if(
-				(button[0].getText()=="X") &&
-				(button[1].getText()=="X") &&
-				(button[2].getText()=="X")
-				) {
-			xWins(0,1,2);
-		}
-		if(
-				(button[3].getText()=="X") &&
-				(button[4].getText()=="X") &&
-				(button[5].getText()=="X")
-				) {
-			xWins(3,4,5);
-		}
-		if(
-				(button[6].getText()=="X") &&
-				(button[7].getText()=="X") &&
-				(button[8].getText()=="X")
-				) {
-			xWins(6,7,8);
-		}
-		if(
-				(button[0].getText()=="X") &&
-				(button[3].getText()=="X") &&
-				(button[6].getText()=="X")
-				) {
-			xWins(0,3,6);
-		}
-		if(
-				(button[1].getText()=="X") &&
-				(button[4].getText()=="X") &&
-				(button[7].getText()=="X")
-				) {
-			xWins(1,4,7);
-		}
-		if(
-				(button[2].getText()=="X") &&
-				(button[5].getText()=="X") &&
-				(button[8].getText()=="X")
-				) {
-			xWins(2,5,8);
-		}
-		if(
-				(button[0].getText()=="X") &&
-				(button[4].getText()=="X") &&
-				(button[8].getText()=="X")
-				) {
-			xWins(0,4,8);
-		}
-		if(
-				(button[2].getText()=="X") &&
-				(button[4].getText()=="X") &&
-				(button[6].getText()=="X")
-				) {
-			xWins(2,4,6);
-		}
-		//Checking for the O Players moves
-		if(
-				(button[0].getText()=="O") &&
-				(button[1].getText()=="O") &&
-				(button[2].getText()=="O")
-				) {
-			oWins(0,1,2);
-		}
-		if(
-				(button[3].getText()=="O") &&
-				(button[4].getText()=="O") &&
-				(button[5].getText()=="O")
-				) {
-			oWins(3,4,5);
-		}
-		if(
-				(button[6].getText()=="O") &&
-				(button[7].getText()=="O") &&
-				(button[8].getText()=="O")
-				) {
-			oWins(6,7,8);
-		}
-		if(
-				(button[0].getText()=="O") &&
-				(button[3].getText()=="O") &&
-				(button[6].getText()=="O")
-				) {
-			oWins(0,3,6);
-		}
-		if(
-				(button[1].getText()=="O") &&
-				(button[4].getText()=="O") &&
-				(button[7].getText()=="O")
-				) {
-			oWins(1,4,7);
-		}
-		if(
-				(button[2].getText()=="O") &&
-				(button[5].getText()=="O") &&
-				(button[8].getText()=="O")
-				) {
-			oWins(2,5,8);
-		}
-		if(
-				(button[0].getText()=="O") &&
-				(button[4].getText()=="O") &&
-				(button[8].getText()=="O")
-				) {
-			oWins(0,4,8);
-		}
-		if(
-				(button[2].getText()=="O") &&
-				(button[4].getText()=="O") &&
-				(button[6].getText()=="O")
-				) {
-			oWins(2,4,6);
-		}
-	}
-	
-	public void xWins(int a,int b,int c) {
-		button[a].setBackground(Color.GREEN);
-		button[b].setBackground(Color.GREEN);
-		button[c].setBackground(Color.GREEN);
-		
-		for(int i=0;i<9;i++) {
-			button[i].setEnabled(false);
-		}
-		textfield.setText("X wins");
-	}
-	public void oWins(int a,int b,int c) {
-		button[a].setBackground(Color.GREEN);
-		button[b].setBackground(Color.GREEN);
-		button[c].setBackground(Color.GREEN);
-		
-		for(int i=0;i<9;i++) {
-			button[i].setEnabled(false);
-		}
-		textfield.setText("O wins");
-	}
+    public Game() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.getContentPane().setBackground(new Color(50, 50, 50));
+        frame.setLayout(new BorderLayout());
+
+        textfield.setBackground(new Color(25, 25, 25));
+        textfield.setForeground(new Color(25, 255, 0));
+        textfield.setFont(new Font("SAN_SERIF", Font.BOLD, 24));
+        textfield.setHorizontalAlignment(JLabel.CENTER);
+        textfield.setOpaque(true);
+
+        titlePanel.setLayout(new BorderLayout());
+        titlePanel.setPreferredSize(new Dimension(400, 100));
+
+        buttonPanel.setLayout(new GridLayout(3, 3));
+        buttonPanel.setBackground(new Color(150, 150, 150, 150));
+
+        for (int i = 0; i < 9; i++) {
+            buttons[i] = new JButton();
+            buttonPanel.add(buttons[i]);
+            buttons[i].setFont(new Font("SAN_SERIF", Font.BOLD, 40));
+            buttons[i].setFocusable(false);
+            buttons[i].addActionListener(this);
+        }
+
+        titlePanel.add(textfield);
+        frame.add(titlePanel, BorderLayout.NORTH);
+        frame.add(buttonPanel);
+
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < 9; i++) {
+            if (e.getSource() == buttons[i] && buttons[i].getText().equals("")) {
+                if (isXTurn) {
+                    buttons[i].setForeground(Color.RED);
+                    buttons[i].setText("X");
+                    textfield.setText("O's Turn");
+                } else {
+                    buttons[i].setForeground(Color.BLUE);
+                    buttons[i].setText("O");
+                    textfield.setText("X's Turn");
+                }
+                isXTurn = !isXTurn;
+                checkWin();
+            }
+        }
+    }
+
+    private void checkWin() {
+        int[][] winPatterns = {
+                {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Rows
+                {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Columns
+                {0, 4, 8}, {2, 4, 6}             // Diagonals
+        };
+
+        for (int[] pattern : winPatterns) {
+            int a = pattern[0];
+            int b = pattern[1];
+            int c = pattern[2];
+
+            if (buttons[a].getText().equals(buttons[b].getText()) &&
+                    buttons[b].getText().equals(buttons[c].getText()) &&
+                    !buttons[a].getText().isEmpty()) {
+                highlightWinningCells(a, b, c);
+                disableButtons();
+                textfield.setText(buttons[a].getText() + " wins!");
+                return;
+            }
+        }
+
+        if (isBoardFull()) {
+            textfield.setText("It's a tie!");
+        }
+    }
+
+    private void highlightWinningCells(int a, int b, int c) {
+        buttons[a].setBackground(Color.GREEN);
+        buttons[b].setBackground(Color.GREEN);
+        buttons[c].setBackground(Color.GREEN);
+    }
+
+    private void disableButtons() {
+        for (JButton button : buttons) {
+            button.setEnabled(false);
+        }
+    }
+
+    private boolean isBoardFull() {
+        for (JButton button : buttons) {
+            if (button.getText().isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
